@@ -18,13 +18,13 @@ $recipes = $statement->fetchAll(PDO::FETCH_ASSOC);
     <body>
         <h1>List of Recipes</h1>
         <ul>
-            <?php foreach ($recipes as $recipe) { ?>
+            <?php foreach ($recipes as $recipe) : ?>
             <li>
                 <a href="show.php?id=<?= $recipe['id'] ?>">
                     <?= $recipe['title'] ?>
                 </a>
             </li>
-            <?php } ?>
+            <?php endforeach ?>
         </ul>
     </body>
 </html>
