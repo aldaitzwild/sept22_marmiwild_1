@@ -1,15 +1,16 @@
 <?php
 require_once 'config.php';
-$connection = new PDO("mysql:host=" . SERVER . ";dbname=" . DATABASE . ";charset=utf8", USER, PASSWORD);
 
+// Fetching a recipe from database
+$connection = new PDO("mysql:host=" . SERVER . ";dbname=" . DATABASE . ";charset=utf8", USER, PASSWORD);
 $query = 'SELECT title, description FROM recipe WHERE id=:id';
 $statement = $connection->prepare($query);
 $statement->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
 $statement->execute();
-
 $recipe = $statement->fetch(PDO::FETCH_ASSOC);
-?>
 
+// Generate the web page
+?>
 <!doctype html>
 <html lang="en">
     <head>

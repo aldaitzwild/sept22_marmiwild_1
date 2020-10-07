@@ -1,11 +1,13 @@
 <?php
 require_once 'config.php';
-$connection = new PDO("mysql:host=" . SERVER . ";dbname=" . DATABASE . ";charset=utf8", USER, PASSWORD);
 
+// Fetching all recipes from database
+$connection = new PDO("mysql:host=" . SERVER . ";dbname=" . DATABASE . ";charset=utf8", USER, PASSWORD);
 $statement = $connection->query('SELECT id, title FROM recipe');
 $recipes = $statement->fetchAll(PDO::FETCH_ASSOC);
-?>
 
+// Generate the web page
+?>
 <!doctype html>
 <html lang="en">
     <head>
