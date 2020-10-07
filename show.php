@@ -1,15 +1,29 @@
 <?php
 require_once 'config.php';
-$connection = new PDO("mysql:host=" . SERVER . ";dbname=" . DATABASE . ";charset=utf8", USER, PASSWORD);
 
+// Input GET parameter validation (interger >0)
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]]);
+if (false === $id || null === $id) {
+    header("Location: /");
+    exit("Wrong input parameter");
+}
+
+// Database connexion - assuming the database is okay
+$connection = new PDO("mysql:host=" . SERVER . ";dbname=" . DATABASE . ";charset=utf8", USER, PASSWORD);
 $query = 'SELECT title, description FROM recipe WHERE id=:id';
 $statement = $connection->prepare($query);
 $statement->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
 $statement->execute();
-
 $recipe = $statement->fetch(PDO::FETCH_ASSOC);
-?>
 
+// Database result check
+if (!isset($recipe['title']) || !isset($recipe['description'])) {
+    header("Location: /");
+    exit("Recipe not found");
+}
+
+// Page generation
+?>
 <!doctype html>
 <html lang="en">
     <head>

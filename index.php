@@ -1,11 +1,13 @@
 <?php
 require_once 'config.php';
-$connection = new PDO("mysql:host=" . SERVER . ";dbname=" . DATABASE . ";charset=utf8", USER, PASSWORD);
 
+// Database connexion - assuming the database is okay
+$connection = new PDO("mysql:host=" . SERVER . ";dbname=" . DATABASE . ";charset=utf8", USER, PASSWORD);
 $statement = $connection->query('SELECT id, title FROM recipe');
 $recipes = $statement->fetchAll(PDO::FETCH_ASSOC);
-?>
 
+// Page generation
+?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -16,13 +18,13 @@ $recipes = $statement->fetchAll(PDO::FETCH_ASSOC);
     <body>
         <h1>List of Recipes</h1>
         <ul>
-            <?php foreach ($recipes as $recipe) : ?>
+            <?php foreach ($recipes as $recipe) { ?>
             <li>
                 <a href="show.php?id=<?= $recipe['id'] ?>">
                     <?= $recipe['title'] ?>
                 </a>
             </li>
-            <?php endforeach ?>
+            <?php } ?>
         </ul>
     </body>
 </html>
