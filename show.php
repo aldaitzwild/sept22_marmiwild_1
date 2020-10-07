@@ -1,7 +1,7 @@
 <?php
 require_once 'config.php';
 
-// Input GET parameter validation (interger >0)
+// Input GET parameter validation (integer >0)
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]]);
 if (false === $id || null === $id) {
     header("Location: /");
