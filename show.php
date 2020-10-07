@@ -8,7 +8,7 @@ if (false === $id || null === $id) {
     exit("Wrong input parameter");
 }
 
-// Database connexion - assuming the database is okay
+// Fetching a recipe from database -  assuming the database is okay
 $connection = new PDO("mysql:host=" . SERVER . ";dbname=" . DATABASE . ";charset=utf8", USER, PASSWORD);
 $query = 'SELECT title, description FROM recipe WHERE id=:id';
 $statement = $connection->prepare($query);
@@ -22,7 +22,7 @@ if (!isset($recipe['title']) || !isset($recipe['description'])) {
     exit("Recipe not found");
 }
 
-// Page generation
+// Generate the web page
 ?>
 <!doctype html>
 <html lang="en">
